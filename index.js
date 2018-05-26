@@ -1,25 +1,31 @@
-var title = $('#title-input').val();
-var body = $('#body-input').val();
+var title = $('.title-input').val();
+var body = $('.body-input').val();
 var numCards = 0;
 var qualityVariable = "swill";
 
-var newCard = function(id , title , body , quality) {
-    return '<div id="' + id + '"class="card-container"><h2 class="title-of-card">'  
-            + title +  '</h2>'
-            + '<button class="delete-button"></button>'
-            +'<p class="body-of-card">'
-            + body + '</p>'
-            + '<button class="upvote"></button>' 
-            + '<button class="downvote"></button>' 
-            + '<p class="quality">' + 'quality:' + '<span class="qualityVariable">' + quality + '</span>' + '</p>'
-            + '<hr>' 
-            + '</div>';
+var newCard = function(id, title, body, quality) {
+    return `<li role="idea card" aria-selected="true" class="idea-card" data-id="${obj.id}">
+        <header class="idea-head">
+          <h2 class="idea-title" tabindex="1" contenteditable="false" aria-label="enter to edit content">
+          ${obj.title}
+          </h2>
+          <button class="delete-button" aria-label="delete"></button>
+        </header>
+        <p class="idea-body" tabindex="0" contenteditable="true" type="submit">
+        ${obj.body}
+        </p>
+        <footer>
+          <button id="up" class="upvote-button" aria-label="upvote"></button>
+          <button id="down" class="downvote-button" aria-label="downvote"></button>
+          <small>${obj.quality}</small>
+        </footer>
+      </li>`;
 };
 
 function cardObject() {
     return {
-        title: $('#title-input').val(),
-        body: $('#body-input').val(),
+        title: $('.title-input').val(),
+        body: $('.body-input').val(),
         quality: qualityVariable
     };
 }
@@ -27,7 +33,7 @@ function cardObject() {
 $.each(localStorage, function(key) {
     var cardData = JSON.parse(this);
     numCards++;
-    $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
+    $( '.bottom-box' ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
 });
 
 var localStoreCard = function() {
@@ -35,19 +41,19 @@ var localStoreCard = function() {
     localStorage.setItem('card' + numCards  , cardString);
 }
 
-$('.save-btn').on('click', function(event) {
+$('.save-button').on('click', function(event) {
     event.preventDefault();
-    if ($('#title-input').val() === "" || $('#body-input').val() === "") {
+    if ($('.title-input').val() === "" || $('.body-input').val() === "") {
        return false;
     };  
 
     numCards++;
-    $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#body-input').val(), qualityVariable)); 
+    $( ".bottom-box").prepend(newCard('card' + numCards, $('.title-input').val(), $('.body-input').val(), qualityVariable)); 
     localStoreCard();
     $('form')[0].reset();
 });
 
-$(".bottom-box").on('click', function(event){
+$('.bottom-box').on('click', function(event){
     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
     var qualityVariable;
 
