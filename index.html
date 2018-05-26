@@ -1,31 +1,39 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>ideaBox</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<meta charset="utf-8"></meta>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ideaBox</title>
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab:700" rel="stylesheet">
 </head>
-
 <body>
-    <section class="container box">
-        <article class="top-box">
-            <form>
-                <h1 class="idea">idea</h1>
-                <h1 class="box">Box</h1>
-                <input id="title-input" type="text" placeholder="Title"><br />
-                <input id="body-input" type="text" placeholder="Body"><br />  
-                <button class="save-btn">save</button><br />
-            </form>
-        </article>
-        
-        <input id="search-input" type="text" placeholder="Search">
-
-        <article class="bottom-box"> </article>
-
-    </section>
-
-    <script src="./jquery/jquery-3.2.1.js"></script>
-    <script src="./index.js"></script>
+	<div class="wrapper">
+		<main>
+			<h1>
+				<span>idea</span>box</h1>
+			<form class="idea-submit">
+				<input class="title-input" type="text" name="title" placeholder="Title" aria-label="idea title">
+				<input class="body-input" type="text" name="body" placeholder="Body" aria-label="idea body text">
+				<button class="save-button" type="submit" aria-label="click hear to save" disabled="disabled">save</button>
+			</form>
+		</main>
+		<section aria-label="my idea list">
+			<form class="search-form">
+				<input class="search-input" type="search" name="search" placeholder="Search" aria-label="enter your search here">
+			</form>
+			<ul aria-label="idea list">
+			</ul>
+		</section>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		window.jQuery || document.write('<script src="turing/jQuery-Compressed/jquery-3.3.1.min.js"><\/script>')
+	</script>
+	<script type="text/javascript" src="index.js"></script>
 </body>
+</html>

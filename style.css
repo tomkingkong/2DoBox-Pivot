@@ -1,180 +1,194 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Roboto Slab', serif;
-}
-
-.container-box {
-    margin: 0;
-}
+/* contains all things */
 
 body {
-    box-sizing: border-box;
-    margin: 0;
+	font-family: "open sans", sans-serif;
 }
 
-.top-box {
-    background-color: #e5f3f2;
-    box-sizing: border-box;
-    height: 300px;
-    margin: 0;
-    text-align: center;
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-h1{
-    color: #6d6e71;
-    display: inline-block;
-    font-size: 275%;
-    margin-bottom:  30px;
+input::placeholder {
+	color: #D1D2D3;
 }
 
-.idea {
-    color: #00a79d;
+/* Head of Page */
+
+main {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	background-color: #E5F3F2;
+	padding: 2rem 1.5rem;
+	width: 100%;
 }
 
-#title-input {
-    align-items: center;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-    width: 45%;
+/* title */
+
+h1 {
+	font-family: "roboto slab", serif;
+	font-size: 3.5em;
+	color: #6D6E71;
+	margin-bottom: 0.5em;
 }
 
-#body-input {
-    align-items: center;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-    width: 45%;
+span {
+	color: #00a79d;
 }
 
-#search-input {
-    height: 30px;
-    margin-top: 50px;
-    width: 45%;
+/* submit form */
+
+.idea-submit {
+	margin: 0 auto;
+	font-size: 1.5em;
+	max-width: 600px;
 }
 
-.save-btn {
-    background-color: #00a79d;
-    border: none;
-    color: #fff;
-    font-size: 120%;
-    height: 30px;
-    width: 45.5%;
+/* submit inputs */
+
+.idea-submit input {
+	transition: all 0.25s linear;
+	outline: 0;
+	border: 0.06em solid #D1D2D3;
+	border-radius: 3px;
+	padding: 2px 0.3em;
+	margin: 0.3rem 0;
+	width: 100%;
 }
 
-.save-btn:hover {
-    background-color: #045e55;
+/* submit button */
+
+.idea-submit button {
+	border: 0;
+	border-radius: 3px;
+	outline: 0;
+	color: #fff;
+	background-color: #00A79D;
+	margin: 0.3rem 0;
+	padding: 10px;
+	width: 100%;
 }
 
-input {
-    align-items: center;
-    display: flex;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 100%;
-    justify-content: space-between;
-    margin: auto;
+.idea-submit button:hover {
+	background-color: #045e55;
 }
 
-.card-container {
-    margin: auto;
-    position: relative;
-    width: 45%;
+/* ideas section */
+
+section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 2rem 1.5rem;
+	width: 100%;
 }
 
-.card {
-    background-color: #ffffff;
-    height: auto;
-    margin: auto;
-    width: 45%;
+/* search form */
+.search-form {
+	width: 100%;
 }
 
-.title-of-card{
-    color: #6D6E71;
-    display: inline-block;
-    font-family: 'Roboto Slab', serif;
-    font-size: 140%;
+/* search input field */
+.search-input {
+	font-size: 1.5em;
+	outline: 0;
+	border: .06em solid #D1D2D3;
+	border-radius: 3px;
+	padding: 0 10px;
+	width: 100%;
+	max-width: 600px;
+}
+
+/* idea card */
+
+li {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	border-bottom: 2px solid #D1D2D3;
+	width: 90vw;
+	max-width: 600px;
+}
+
+li header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 2em;
+}
+
+li p {
+	overflow: scroll;
+	color: #939598;
+	font-size: 1.2em;
+	line-height: 1.3em;
+	margin: .8em 0;
+	max-height: 4em;
+}
+
+li footer {
+	display: flex;
+	align-items: center;
+	padding: 1em 0;
 }
 
 h2 {
-   color: #6d6e71; 
-   display: inline-block;
-   font-family: 'Roboto Slab', serif;
-   font-size: 150%;
+	font-family: "Roboto Slab", serif;
+	font-size: 1.4em;
+	color: #6D6E71;
+	overflow: scroll;
+	max-height: 2em;
+	max-width: 20em;
 }
 
-p {
-    color: #939598;
-    font-family: 'Open Sans', sans-serif;
-}
-
-.body-of-card{
-    color: #939598;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 100%;
-}
-
-button {
-    background-color: transparent;
-    border: none;
-}
-
-.upvote {
-    background-image: url(./images/upvote.svg);
-    background-size: cover;
-    height: 20px;
-    margin-right: 5px; 
-    width: 20px;
-}
-
-.upvote:hover {
-    background-color: transparent;
-    background-image: url(./images/upvote-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
-}
-
-.downvote {
-    background-image: url(./images/downvote.svg);
-    background-size: cover;
-    height: 20px;
-    margin-right: 5px; 
-    width: 20px;
-}
-
-.downvote:hover {
-    background-image: url(./images/downvote-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
-}
+/* delete button */
 
 .delete-button {
-    background-image: url(./images/delete.svg);
-    background-size: cover;
-    height: 20px;
-    position: absolute;
-    right: 10px;
-    top: 15px;
-    width: 20px;
+	background: url(images/delete.svg) no-repeat;
+	outline: 0;
+	width: 1.5em;
+	height: 1.5em;
 }
 
 .delete-button:hover {
-    background-image: url(./images/delete-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
+	background: url(images/delete-hover.svg) no-repeat;
 }
 
-@media(max-width: 640px){
+/* upvote button */
 
-    .card-container {
-        width: 85%;
-    }
-
-    #search-input {
-        border: solid #999 1px;
-    }
+.upvote-button {
+	background: url(images/upvote.svg) no-repeat;
+	outline: 0;
+	margin: 0 .8em;
+	width: 1.5em;
+	height: 1.5em;
 }
 
+.upvote-button:hover {
+	background: url(images/upvote-hover.svg) no-repeat;
+}
+
+/* downvote button */
+
+.downvote-button {
+	background: url(images/downvote.svg) no-repeat;
+	outline: 0;
+	width: 1.5em;
+	height: 1.5em;
+}
+
+.downvote-button:hover {
+	background: url(images/downvote-hover.svg) no-repeat;
+}
+
+/* screen at 400px or less */
+
+@media only screen and (max-width: 400px) {
+	.idea-submit .body-input {
+		padding-bottom: 3em;
+	}
+}
