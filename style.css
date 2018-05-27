@@ -163,7 +163,6 @@ h2 {
 .upvote-button {
 	background: url(images/upvote.svg) no-repeat;
 	outline: 0;
-	margin: 0 .8em;
 	width: 1.5em;
 	height: 1.5em;
 }
@@ -177,6 +176,7 @@ h2 {
 .downvote-button {
 	background: url(images/downvote.svg) no-repeat;
 	outline: 0;
+	margin: 0 .8em;
 	width: 1.5em;
 	height: 1.5em;
 }

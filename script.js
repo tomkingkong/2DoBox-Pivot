@@ -1,8 +1,8 @@
 $('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
 
 function enableSaveButton() {
-    if ($(".title-input").val() !== "" && $(".body-input").val() !== "") {
-        $(".save-button").prop("disabled", false);
+    if ($('.title-input').val() !== '' && $('.body-input').val() !== '') {
+        $('.save-button').prop('disabled', false);
     } else {
         return false;
     }
@@ -10,43 +10,39 @@ function enableSaveButton() {
 
 $('.idea-form').on('submit', function(event) {
 		event.preventDefault();
-		saveIdea();
+		displayIdea(generateIdea);
 		$('.idea-form')[0].reset();
 });
-    
 
-function saveIdea() {
-	console.log('save');
-	// numCards++;
-	// $( ".bottom-box").prepend(newCard('card' + numCards, $('.title-input').val(), $('.body-input').val(), qualityVariable)); 
-	// localStoreCard();
-	// $('form')[0].reset(); 
+function Idea(title, body) {
+  this.title = title;
+  this.body = body;
+  this.id = Date.now();
+  this.quality = "swill";
 }
-// var newCard = function(id, title, body, quality) {
-    //     return `<li role="idea card" aria-selected="true" class="idea-card" data-id="${obj.id}">
-    //         <header class="idea-head">
-    //           <h2 class="idea-title" tabindex="1" contenteditable="false" aria-label="enter to edit content">
-    //           ${obj.title}
-    //           </h2>
-    //           <button class="delete-button" aria-label="delete"></button>
-    //         </header>
-    //         <p class="idea-body" tabindex="0" contenteditable="true" type="submit">
-    //         ${obj.body}
-//         </p>
-//         <footer>
-//           <button id="up" class="upvote-button" aria-label="upvote"></button>
-//           <button id="down" class="downvote-button" aria-label="downvote"></button>
-//           <small>${obj.quality}</small>
-//         </footer>
-//       </li>`;
-// };
 
-function cardObject() {
-    return {
-        title: $('.title-input').val(),
-        body: $('.body-input').val(),
-        quality: qualityVariable
-    };
+function generateIdea() {
+    var title = $(".title-input").val();
+    var body = $(".body-input").val();
+    var newIdea = new Idea(title, body);
+    var ideaCard = 
+    `<li role="idea card" aria-selected="true" class="idea-card" data-id="${newIdea.id}">
+        <header class="idea-head">
+            <h2 class="idea-title" tabindex="1" contenteditable="false" aria-label="enter to edit content">${newIdea.title}</h2>
+            <button class="delete-button" aria-label="delete"></button>
+        </header>
+        <p class="idea-body" tabindex="0" contenteditable="true" type="submit">${newIdea.body}</p>
+        <footer>
+            <button id="up" class="upvote-button" aria-label="upvote"></button>
+            <button id="down" class="downvote-button" aria-label="downvote"></button>
+            <small>quality: ${newIdea.quality}</small>
+        </footer>
+    </li>`;
+    return ideaCard;
+};
+
+function displayIdea(idea) {
+  $("ul").prepend(idea);
 }
 
 // $.each(localStorage, function(key) {
