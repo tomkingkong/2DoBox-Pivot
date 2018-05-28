@@ -9,22 +9,31 @@ function enableSaveButton() {
 }
 
 $('.idea-form').on('submit', function(event) {
-		event.preventDefault();
-		displayIdea(generateIdea);
-		$('.idea-form')[0].reset();
+        event.preventDefault();
+        setIdeasLocalStorage(newIdea(newIdea));
+        displayIdea(generateIdea(newIdea(newIdea)));
+        clearForm();
 });
+
+function clearForm() {
+    $('.idea-form')[0].reset();
+    $('.save-button').prop('disabled', true);
+}
 
 function Idea(title, body) {
   this.title = title;
   this.body = body;
   this.id = Date.now();
   this.quality = "swill";
+  this.isRead = false;
 }
 
-function generateIdea() {
-    var title = $(".title-input").val();
-    var body = $(".body-input").val();
-    var newIdea = new Idea(title, body);
+function newIdea(newIdea) {
+    var newIdea = new Idea($(".title-input").val(), $(".body-input").val());
+    return newIdea
+}
+
+function generateIdea(newIdea) {
     var ideaCard = 
     `<li role="idea card" aria-selected="true" class="idea-card" data-id="${newIdea.id}">
         <header class="idea-head">
@@ -45,17 +54,19 @@ function displayIdea(idea) {
   $("ul").prepend(idea);
 }
 
+function getIdeasLocalStorage(obj) {
+    return [JSON.parse(localStorage.getItem(obj.id))] || [];
+}
+
+function setIdeasLocalStorage(newIdea) {
+    return localStorage.setItem(JSON.stringify(newIdea.id), JSON.stringify(newIdea));
+}
+
 // $.each(localStorage, function(key) {
 //     var cardData = JSON.parse(this);
 //     numCards++;
 //     $('.bottom-box').prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
 // });
-
-var localStoreCard = function() {
-    var cardString = JSON.stringify(cardObject());
-    localStorage.setItem('card' + numCards  , cardString);
-}
-
 
 // $('.bottom-box').on('click', function(event){
 //     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
