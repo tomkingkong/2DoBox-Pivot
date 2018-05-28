@@ -58,9 +58,17 @@ function displayIdea(idea) {
 
 $('ul').on('click', ('.upvote-button, .downvote-button'), currentIdea);
 
+$('ul').on('click', '.delete-button', removeIdea);
+
+function removeIdea() {
+	$(this).closest('li').remove();
+	localStorage.removeItem($(this).closest('li').attr('data-id'));
+}
+
 function currentIdea(ideaID) {
 	var ideaID = $(this).closest('li').attr('data-id');
 	var currentIdea = getIdeaFromStorage(ideaID);
+	console.log(currentIdea);
 	return currentIdea;
 }
 
