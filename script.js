@@ -1,6 +1,7 @@
 $(window).on('load', populateIdeasToPage);
 $('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
 $('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
+$('ul').on('click', ('.upvote, .downvote'), voting)
 $('ul').on('click', '.delete-button', removeIdea);
 
 $('.idea-form').on('submit', function (event) {
@@ -11,11 +12,8 @@ $('.idea-form').on('submit', function (event) {
 });
 
 function enableSaveButton() {
-	if ($('.title-input').val() === '' || $('.body-input').val() === '') {
-		$('.save-button').prop('disabled', true);
-	} else {
-		$('.save-button').prop('disabled', false);
-	}
+	($('.title-input').val() === '' || $('.body-input').val() === '') ? 
+	$('.save-button').prop('disabled', true) : 	$('.save-button').prop('disabled', false);
 }
 
 function clearForm() {
@@ -27,7 +25,7 @@ function Idea(title, body) {
 	this.title = title;
 	this.body = body;
 	this.id = Date.now();
-	this.quality = "swill";
+	this.quality = 'swill';
 	this.isRead = false;
 }
 
@@ -49,16 +47,13 @@ function generateIdea(newIdea) {
         </header>
         <p class="idea-body" tabindex="0" contenteditable="false" type="submit">${newIdea.body}</p>
         <footer>
-            <button id="up" class="upvote-button" aria-label="upvote"></button>
-            <button id="down" class="downvote-button" aria-label="downvote"></button>
+            <button id="up" class="upvote" aria-label="upvote"></button>
+            <button id="down" class="downvote" aria-label="downvote"></button>
             <small>quality: ${newIdea.quality}</small>
         </footer>
     </li>`;
 	return ideaCard;
 };
-
-
-// $('ul').on('click', ('.upvote-button, .downvote-button'), selectedIdea);
 
 function makeContentEditable(event) {
 	if ($(event.target).prop('contenteditable', false)){
@@ -66,17 +61,6 @@ function makeContentEditable(event) {
 	} else {
 		$(event.target).prop('contenteditable', false);
 	}
-}
-
-function selectedIdea(event) {
-	return $(this).closest('li').attr('data-id');
-}
-
-function currentIdea(ideaId) {
-	var ideaId = $(this).closest('li').attr('data-id');
-	var currentIdea = getIdeaFromStorage(ideaId);
-	console.log(currentIdea);
-	return currentIdea;
 }
 
 function removeIdea() {
@@ -98,46 +82,13 @@ function populateIdeasToPage() {
 	})
 }
 
-
-$('ul').on('click', ('.upvote-button, .downvote-button'), function(event){
-		var ideaId = $(this).closest('li').attr('data-id');
-		var currentIdea = getIdeaFromStorage(ideaId);
-
-		//USE TERNARY STATEMENTS
-
-		//Output
-		currentIdea.quality = 'quality: different';
-		$(this).siblings('small').text(currentIdea.quality);
-
-    // if ($(this).className === 'upvote-button' || $(this).className === 'downvote-button'){
-    //     if ($(this).className === 'upvote-button' && currentIdea.quality === 'plausible'){
-    //         currentIdea.quality = 'genius';
-    //         $($(event.target).siblings('p.quality').children()[0]).text(currentIdea.quality);
-
-    //     } else if ($(this).className === 'upvote-button' && currentIdea.quality === 'swill') {
-    //         currentIdea.quality = 'plausible';
-    //         $($(event.target).siblings('p.quality').children()[0]).text(currentIdea.quality);
-
-    //     } else if ($(this).className === 'downvote-button' && currentIdea.quality === 'plausible') {
-    //         currentIdea.quality = 'swill'
-    //         $($(event.target).siblings('p.quality').children()[0]).text(currentIdea.quality);
-
-    //     } else if ($(this).className === 'downvote-button' && currentIdea.quality === 'genius') {
-    //         currentIdea.quality = 'plausible'
-    //         $($(event.target).siblings('p.quality').children()[0]).text(currentIdea.quality);
-
-    //     } else if ($(this).className === 'downvote-button' && currentIdea.quality === 'swill') {
-    //         currentIdea.quality = 'swill';
-
-    //     } else if ($(this).className === 'upvote-button' && currentIdea.quality === 'genius') {
-    //         currentIdea.quality = 'genius';
-    //     }
-
-    // var cardHTML = $(event.target).closest('.card-container');
-    // var cardHTMLId = cardHTML[0].id;
-    // var cardObjectInJSON = localStorage.getItem(cardHTMLId);
-    // var cardObjectInJS = JSON.parse(cardObjectInJSON);
-
-    // cardObjectInJS.quality = qualityVariable;
-    // }
-});
+function voting(event) {
+	var currentIdea = getIdeaFromStorage($(this).closest('li').attr('data-id'));
+	var qualityArray = ['swill', 'plausible', 'genius'];
+	var thisQuality = qualityArray.indexOf(currentIdea.quality);
+	(this.className === 'upvote' && thisQuality < 2) ? (thisQuality++, currentIdea.quality = qualityArray[thisQuality])
+	: (this.className === 'downvote' && thisQuality > 0) ? (thisQuality--, currentIdea.quality = qualityArray[thisQuality]) 
+	: null;
+	setIdeaToStorage(currentIdea);
+	location.reload();
+}
