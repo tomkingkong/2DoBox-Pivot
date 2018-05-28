@@ -88,11 +88,13 @@ section {
 }
 
 /* search form */
+
 .search-form {
 	width: 100%;
 }
 
 /* search input field */
+
 .search-input {
 	font-size: 1.5em;
 	outline: 0;
