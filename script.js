@@ -1,8 +1,8 @@
 $(window).on('load', populateIdeasToPage);
 $('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
 $('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
-$('ul').on('click', ('.upvote, .downvote'), voting)
-$('ul').on('click', '.delete-button', removeIdea);
+$('ul').on('click', ('.upvote-btn, .downvote-btn'), voting)
+$('ul').on('click', '.delete-btn', removeIdea);
 
 $('.idea-form').on('submit', function (event) {
 	event.preventDefault();
@@ -13,12 +13,12 @@ $('.idea-form').on('submit', function (event) {
 
 function enableSaveButton() {
 	($('.title-input').val() === '' || $('.body-input').val() === '') ? 
-	$('.save-button').prop('disabled', true) : 	$('.save-button').prop('disabled', false);
+	$('.save-btn').prop('disabled', true) : 	$('.save-btn').prop('disabled', false);
 }
 
 function clearForm() {
 	$('.idea-form')[0].reset();
-	$('.save-button').prop('disabled', true);
+	$('.save-btn').prop('disabled', true);
 }
 
 function Idea(title, body) {
@@ -42,14 +42,15 @@ function generateIdea(newIdea) {
 	var ideaCard =
 		`<li role="idea card" aria-selected="true" class="idea-card" data-id="${newIdea.id}">
         <header class="idea-head">
-            <h2 class="idea-title" tabindex="1" contenteditable="false" aria-label="enter to edit content">${newIdea.title}</h2>
-            <button class="delete-button" aria-label="delete"></button>
+					<h2 class="idea-title" tabindex="1" contenteditable="false" aria-label="enter to edit content">${newIdea.title}</h2>
+					<button class="delete-btn" aria-label="delete"></button>
         </header>
         <p class="idea-body" tabindex="0" contenteditable="false" type="submit">${newIdea.body}</p>
         <footer>
-            <button id="up" class="upvote" aria-label="upvote"></button>
-            <button id="down" class="downvote" aria-label="downvote"></button>
-            <small>quality: ${newIdea.quality}</small>
+					<button id="up" class="upvote-btn" aria-label="upvote"></button>
+					<button id="down" class="downvote-btn" aria-label="downvote"></button>
+					<h3>quality:&nbsp;</h4>
+					<small>${newIdea.quality}</small>
         </footer>
     </li>`;
 	return ideaCard;
@@ -86,8 +87,8 @@ function voting(event) {
 	var currentIdea = getIdeaFromStorage($(this).closest('li').attr('data-id'));
 	var qualityArray = ['swill', 'plausible', 'genius'];
 	var thisQuality = qualityArray.indexOf(currentIdea.quality);
-	(this.className === 'upvote' && thisQuality < 2) ? (thisQuality++, currentIdea.quality = qualityArray[thisQuality])
-	: (this.className === 'downvote' && thisQuality > 0) ? (thisQuality--, currentIdea.quality = qualityArray[thisQuality]) 
+	(this.className === 'upvote-btn' && thisQuality < 2) ? (thisQuality++, currentIdea.quality = qualityArray[thisQuality])
+	: (this.className === 'downvote-btn' && thisQuality > 0) ? (thisQuality--, currentIdea.quality = qualityArray[thisQuality]) 
 	: null;
 	setIdeaToStorage(currentIdea);
 	location.reload();
