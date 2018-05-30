@@ -3,6 +3,7 @@ $('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
 $('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
 $('ul').on('click', ('.upvote-btn, .downvote-btn'), voting)
 $('ul').on('click', '.delete-btn', removeIdea);
+$('ul').on('click', '.completed-task-btn', toggleComplete);
 
 $('.idea-form').on('submit', function (event) {
 	event.preventDefault();
@@ -26,7 +27,7 @@ function Idea(title, body) {
 	this.body = body;
 	this.id = Date.now();
 	this.quality = 'swill';
-	this.isRead = false;
+	this.isComplete = false;
 }
 
 function newIdea(newIdea) {
@@ -46,9 +47,10 @@ function generateIdea(newIdea) {
 					<button class="delete-btn" aria-label="delete"></button>
         </header>
         <p class="idea-body" tabindex="0" contenteditable="false" type="submit">${newIdea.body}</p>
-        <footer>
-					<button id="up" class="upvote-btn" aria-label="upvote"></button>
-					<button id="down" class="downvote-btn" aria-label="downvote"></button>
+				<footer>
+					<button class="completed-task-btn" aria-label="completed"></button>
+					<button class="upvote-btn" aria-label="upvote"></button>
+					<button class="downvote-btn" aria-label="downvote"></button>
 					<h3>quality:&nbsp;</h4>
 					<small>${newIdea.quality}</small>
         </footer>
@@ -108,4 +110,8 @@ function search() {
 	storageList.filter(idea => idea.title.match(regexp) || idea.body.match(regexp)).forEach(function(idea){
 			displayIdea(generateIdea(idea));
 		});
+}
+
+function toggleComplete() {
+	$(this).closest('li').toggleClass('completed')
 }
