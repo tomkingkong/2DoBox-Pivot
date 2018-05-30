@@ -4,6 +4,10 @@ body {
 	font-family: "open sans", sans-serif;
 }
 
+button {
+	cursor: pointer;
+}
+
 .wrapper {
 	display: flex;
 	flex-direction: column;
@@ -213,6 +217,22 @@ h3 {
 	filter: contrast(20%);
 	text-decoration: line-through;
 }
+
+.show-more-btn {
+	background-color: #00a79d;
+	border: 1px solid #939598;
+	border-radius: 2px;
+	color: #fff;
+	outline: 0;
+	margin: 2em 0;
+	height: 2.5em;
+	width: 100%;
+}
+
+.show-more-btn:hover {
+	background-color: #045e55;
+}
+
 
 /* screen at 400px or less */
 
