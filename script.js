@@ -1,8 +1,10 @@
 $(window).on('load', populateIdeasToPage);
 $('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
 $('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
-$('ul').on('click', ('.upvote-btn, .downvote-btn'), voting)
+$('ul').on('focusout', ('.idea-title, .idea-body'), changeText);
+$('ul').on('click', ('.upvote-btn, .downvote-btn'), voting);
 $('ul').on('click', '.delete-btn', removeIdea);
+$('.search').on('keyup search', search);
 
 $('.idea-form').on('submit', function (event) {
 	event.preventDefault();
@@ -83,18 +85,16 @@ function populateIdeasToPage() {
 	})
 }
 
-function voting(event) {
+function voting() {
 	var currentIdea = getIdeaFromStorage($(this).closest('li').attr('data-id'));
 	var qualityArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
 	var thisQuality = qualityArray.indexOf(currentIdea.quality);
 	(this.className === 'upvote-btn' && thisQuality < 4) ? (thisQuality++, currentIdea.quality = qualityArray[thisQuality])
 	: (this.className === 'downvote-btn' && thisQuality > 0) ? (thisQuality--, currentIdea.quality = qualityArray[thisQuality]) 
-	: null;
+	: currentIdea.quality = currentIdea.quality;
 	setIdeaToStorage(currentIdea);
 	location.reload();
 }
-
-$('.search').on('keyup search', search);
 
 function search() {
 	$('li').remove();
@@ -108,4 +108,14 @@ function search() {
 	storageList.filter(idea => idea.title.match(regexp) || idea.body.match(regexp)).forEach(function(idea){
 			displayIdea(generateIdea(idea));
 		});
+}
+
+function changeText() {
+	var currentIdea = getIdeaFromStorage($(this).closest('li').attr('data-id'));
+	var newText = $(this).closest('h2').text() || $(this).closest('p').text();
+	(this.className === 'idea-body') ? (currentIdea.body = newText) :
+	(this.className === 'idea-title') ? (currentIdea.title = newText) : undefined;
+	setIdeaToStorage(currentIdea);
+	$('li').remove();
+	populateIdeasToPage();
 }
