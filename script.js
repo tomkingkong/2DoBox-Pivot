@@ -3,6 +3,7 @@ $('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
 $('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
 $('ul').on('click', ('.upvote-btn, .downvote-btn'), voting)
 $('ul').on('click', '.delete-btn', removeIdea);
+$('.search').on('keyup', search);
 
 $('.idea-form').on('submit', function (event) {
 	event.preventDefault();
@@ -94,21 +95,13 @@ function voting(event) {
 	location.reload();
 }
 
-$('.search').on('keyup', search);
-
 function search() {
-  // var str = $('.search').val();
-  var regexp = new RegExp($('.search').val(), 'ig'); //item to search in string, 'i' -capitol or lowercase, 'g' -all of the string
-	// storageList = grabStorageData();
-	console.log(Object.entries(localStorage))
-	var titleResults = Object.values(localStorage).filter(obj => obj.match(regexp));
-	var bodyResults = Object.values(localStorage).filter(obj => obj.match(regexp));
-	// console.log(titleResults);
-	
-  // var titleResults = storageList.filter(obj => obj.title.match(regexp));//match regex string to title, return filtered array
-  // var bodyResults = storageList.filter(obj => obj.body.match(regexp));//match regex string to body, return filtered array
-  var $mergedArray = $.merge(titleResults, bodyResults);//merge both results
-  var $results = jQuery.uniqueSort($mergedArray);//remove duplicates and return single array
-	// $('li').remove();
-  // console.log($results);//restore filtered list of ideas to DOM
+	$('li').remove();
+	var storageList = [];
+	var search = $('.search').val();
+	var regexp = new RegExp(search, 'ig');
+	Object.keys(localStorage).forEach(function(idea){
+		storageList.push(JSON.parse(localStorage.getItem(idea)));
+		return storageList.filter(idea => idea.title.match(regexp) || idea.body.match(regexp)).forEach(idea => displayIdea(generateIdea(idea)));
+	})
 }
