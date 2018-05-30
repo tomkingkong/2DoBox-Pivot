@@ -3,7 +3,6 @@ $('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
 $('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
 $('ul').on('click', ('.upvote-btn, .downvote-btn'), voting)
 $('ul').on('click', '.delete-btn', removeIdea);
-$('.search').on('keyup', search);
 
 $('.idea-form').on('submit', function (event) {
 	event.preventDefault();
@@ -95,6 +94,8 @@ function voting(event) {
 	location.reload();
 }
 
+$('.search').on('keyup search', search);
+
 function search() {
 	$('li').remove();
 	var storageList = [];
@@ -102,6 +103,9 @@ function search() {
 	var regexp = new RegExp(search, 'ig');
 	Object.keys(localStorage).forEach(function(idea){
 		storageList.push(JSON.parse(localStorage.getItem(idea)));
-		return storageList.filter(idea => idea.title.match(regexp) || idea.body.match(regexp)).forEach(idea => displayIdea(generateIdea(idea)));
+		return storageList;
 	})
+	storageList.filter(idea => idea.title.match(regexp) || idea.body.match(regexp)).forEach(function(idea){
+			displayIdea(generateIdea(idea));
+		});
 }
