@@ -25,7 +25,7 @@ function Idea(title, body) {
 	this.title = title;
 	this.body = body;
 	this.id = Date.now();
-	this.quality = 'swill';
+	this.quality = 'normal';
 	this.isRead = false;
 }
 
@@ -47,8 +47,8 @@ function generateIdea(newIdea) {
         </header>
         <p class="idea-body" tabindex="0" contenteditable="false" type="submit">${newIdea.body}</p>
         <footer>
-					<button id="up" class="upvote-btn" aria-label="upvote"></button>
-					<button id="down" class="downvote-btn" aria-label="downvote"></button>
+					<button class="upvote-btn" aria-label="upvote"></button>
+					<button class="downvote-btn" aria-label="downvote"></button>
 					<h3>quality:&nbsp;</h4>
 					<small>${newIdea.quality}</small>
         </footer>
@@ -85,9 +85,9 @@ function populateIdeasToPage() {
 
 function voting(event) {
 	var currentIdea = getIdeaFromStorage($(this).closest('li').attr('data-id'));
-	var qualityArray = ['swill', 'plausible', 'genius'];
+	var qualityArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
 	var thisQuality = qualityArray.indexOf(currentIdea.quality);
-	(this.className === 'upvote-btn' && thisQuality < 2) ? (thisQuality++, currentIdea.quality = qualityArray[thisQuality])
+	(this.className === 'upvote-btn' && thisQuality < 4) ? (thisQuality++, currentIdea.quality = qualityArray[thisQuality])
 	: (this.className === 'downvote-btn' && thisQuality > 0) ? (thisQuality--, currentIdea.quality = qualityArray[thisQuality]) 
 	: null;
 	setIdeaToStorage(currentIdea);
