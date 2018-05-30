@@ -1,4 +1,12 @@
-$(window).on('load', populateIdeasToPage);
+$(window).on('load', function(){
+	if(Object.keys(localStorage).length > 10){
+		populateFirstTenIdeas(); 
+	} else {
+		populateAllIdeasToPage();
+	}
+});
+
+$('.show-all-tasks-btn').on('click', populateAllIdeasToPage)
 $('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
 $('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
 $('ul').on('focusout', ('.idea-title, .idea-body'), changeText);
@@ -66,6 +74,16 @@ function makeContentEditable(event) {
 	}
 }
 
+function changeText() {
+	var currentIdea = getIdeaFromStorage($(this).closest('li').attr('data-id'));
+	var newText = $(this).closest('h2').text() || $(this).closest('p').text();
+	(this.className === 'idea-body') ? (currentIdea.body = newText) :
+	(this.className === 'idea-title') ? (currentIdea.title = newText) : undefined;
+	setIdeaToStorage(currentIdea);
+	$('li').remove();
+	populateAllIdeasToPage();
+}
+
 function removeIdea() {
 	$(this).closest('li').remove();
 	localStorage.removeItem($(this).closest('li').attr('data-id'));
@@ -79,7 +97,13 @@ function setIdeaToStorage(newIdea) {
 	return localStorage.setItem(JSON.stringify(newIdea.id), JSON.stringify(newIdea));
 }
 
-function populateIdeasToPage() {
+function populateFirstTenIdeas() {
+	Object.keys(localStorage).slice(-10, ).forEach(function(idea) {
+		displayIdea(generateIdea(JSON.parse(localStorage.getItem(idea))));
+	})
+}
+
+function populateAllIdeasToPage() {
 	Object.keys(localStorage).forEach(function(idea) {
 		displayIdea(generateIdea(JSON.parse(localStorage.getItem(idea))));
 	})
@@ -106,16 +130,6 @@ function search() {
 		return storageList;
 	})
 	storageList.filter(idea => idea.title.match(regexp) || idea.body.match(regexp)).forEach(function(idea){
-			displayIdea(generateIdea(idea));
-		});
-}
-
-function changeText() {
-	var currentIdea = getIdeaFromStorage($(this).closest('li').attr('data-id'));
-	var newText = $(this).closest('h2').text() || $(this).closest('p').text();
-	(this.className === 'idea-body') ? (currentIdea.body = newText) :
-	(this.className === 'idea-title') ? (currentIdea.title = newText) : undefined;
-	setIdeaToStorage(currentIdea);
-	$('li').remove();
-	populateIdeasToPage();
+		displayIdea(generateIdea(idea));
+	});
 }
