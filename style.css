@@ -90,7 +90,10 @@ span {
 	padding: 10px;
 	width: 100%;
 	max-width: 600px;
+}
 
+.completed-todos-btn:hover {
+	background-color: forestgreen;
 }
 
 /* ideas section */
@@ -253,6 +256,19 @@ h3 {
 .show-more-btn:hover {
 	background-color: #045e55;
 }
+
+.filter-btns {
+	width: 100%;
+	display: flex;
+	max-width: 600px;
+	justify-content: space-between;
+
+
+}
+.filter-btns input {
+	margin-bottom: 1em;
+}
+
 
 
 
