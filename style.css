@@ -80,6 +80,19 @@ span {
 	background-color: #045e55;
 }
 
+.completed-todos-btn {
+	border: 0;
+	border-radius: 3px;
+	outline: 0;
+	color: #fff;
+	background-color: yellowgreen;
+	margin: 0.3rem 0;
+	padding: 10px;
+	width: 100%;
+	max-width: 600px;
+
+}
+
 /* ideas section */
 
 section {
@@ -199,22 +212,26 @@ h3 {
 
 .downvote-btn:hover {
 	background: url(images/downvote-hover.svg) no-repeat;
+	background-color: skyblue;
 }
 
 .completed-task-btn {
-	background: url(images/upvote.svg) no-repeat;
+	background: url(images/circle.svg) no-repeat;
+	background-color: lightgray;
+	border: 1px solid #939598;
+	border-radius: 50%;
 	outline: 0;
-	width: 1.5em;
-	height: 1.5em;
+	margin-right: 0.8em;
+	width: 1.3em;
+	height: 1.3em;
 }
 
 .completed-task-btn:hover {
-	background: url(images/upvote-hover.svg) no-repeat;
+	background: url(images/bluecheck.svg) no-repeat;
 }
 
 .completed {
-	background-color: lightcoral;
-	filter: contrast(20%);
+	background-color:  #D1D2D3;
 	text-decoration: line-through;
 }
 

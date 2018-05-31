@@ -5,6 +5,7 @@ $('ul').on('click', ('.upvote-btn, .downvote-btn'), voting);
 $('ul').on('click', '.delete-btn', removeIdea);
 $('.search').on('keyup search', search);
 $('.show-more-btn').on('click', populateAllIdeasToPage)
+$('ul').on('click', '.completed-task-btn', toggleComplete);
 
 $(window).on('load', function(){
 	if(Object.keys(localStorage).length > 10){
@@ -35,9 +36,10 @@ function Idea(title, body) {
 	this.title = title;
 	this.body = body;
 	this.id = Date.now();
-	this.quality = 'normal';
-	this.isRead = false;
+	this.quality = 'swill';
+	this.isComplete = false;
 }
+
 
 function newIdea(newIdea) {
 	var newIdea = new Idea($('.title-input').val(), $('.body-input').val());
@@ -49,14 +51,19 @@ function displayIdea(idea) {
 }
 
 function generateIdea(newIdea) {
+	var completed = 'idea-card'; 
+	if(newIdea.isComplete === true) {
+		completed = 'idea-card completed';
+		}
 	var ideaCard =
-		`<li role="idea card" aria-selected="true" class="idea-card" data-id="${newIdea.id}">
+		`<li role="idea card" aria-selected="true" class="${completed}" data-id="${newIdea.id}">
         <header class="idea-head">
 					<h2 class="idea-title" tabindex="1" contenteditable="false" aria-label="enter to edit content">${newIdea.title}</h2>
 					<button class="delete-btn" aria-label="delete"></button>
         </header>
         <p class="idea-body" tabindex="0" contenteditable="false" type="submit">${newIdea.body}</p>
-        <footer>
+				<footer>
+					<button class="completed-task-btn" aria-label="completed"></button>
 					<button class="upvote-btn" aria-label="upvote"></button>
 					<button class="downvote-btn" aria-label="downvote"></button>
 					<h3>quality:&nbsp;</h4>
@@ -106,6 +113,7 @@ function populateFirstTenIdeas() {
 function populateAllIdeasToPage() {
 	$('li').remove();
 	Object.keys(localStorage).forEach(function(idea) {
+		console.log(JSON.parse(localStorage.getItem(idea)));
 		displayIdea(generateIdea(JSON.parse(localStorage.getItem(idea))));
 	})
 }
@@ -131,6 +139,13 @@ function search() {
 		return storageList;
 	})
 	storageList.filter(idea => idea.title.match(regexp) || idea.body.match(regexp)).forEach(function(idea){
-		displayIdea(generateIdea(idea));
-	});
+			displayIdea(generateIdea(idea));
+		});
+}
+
+function toggleComplete() {
+	$(this).closest('li').toggleClass('completed')
+	var currentIdea = getIdeaFromStorage($(this).closest("li").attr("data-id"));
+	currentIdea.isComplete = !currentIdea.isComplete;
+	setIdeaToStorage(currentIdea);
 }
