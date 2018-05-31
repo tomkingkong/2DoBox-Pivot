@@ -30,6 +30,7 @@ function Idea(title, body) {
 	this.isComplete = false;
 }
 
+
 function newIdea(newIdea) {
 	var newIdea = new Idea($('.title-input').val(), $('.body-input').val());
 	return newIdea
@@ -40,8 +41,12 @@ function displayIdea(idea) {
 }
 
 function generateIdea(newIdea) {
+	var completed = 'idea-card'; 
+	if(newIdea.isComplete === true) {
+		completed = 'idea-card completed';
+		}
 	var ideaCard =
-		`<li role="idea card" aria-selected="true" class="idea-card" data-id="${newIdea.id}">
+		`<li role="idea card" aria-selected="true" class="${completed}" data-id="${newIdea.id}">
         <header class="idea-head">
 					<h2 class="idea-title" tabindex="1" contenteditable="false" aria-label="enter to edit content">${newIdea.title}</h2>
 					<button class="delete-btn" aria-label="delete"></button>
@@ -81,6 +86,7 @@ function setIdeaToStorage(newIdea) {
 
 function populateIdeasToPage() {
 	Object.keys(localStorage).forEach(function(idea) {
+		console.log(JSON.parse(localStorage.getItem(idea)));
 		displayIdea(generateIdea(JSON.parse(localStorage.getItem(idea))));
 	})
 }
@@ -114,4 +120,10 @@ function search() {
 
 function toggleComplete() {
 	$(this).closest('li').toggleClass('completed')
+	var currentIdea = getIdeaFromStorage($(this).closest("li").attr("data-id"));
+	currentIdea.isComplete = !currentIdea.isComplete;
+	setIdeaToStorage(currentIdea);
+
+	// setIdeatToStorage(currentIdea)
 }
+
