@@ -1,3 +1,11 @@
+$('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
+$('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
+$('ul').on('focusout', ('.idea-title, .idea-body'), changeText);
+$('ul').on('click', ('.upvote-btn, .downvote-btn'), voting);
+$('ul').on('click', '.delete-btn', removeIdea);
+$('.search').on('keyup search', search);
+$('.show-more-btn').on('click', populateAllIdeasToPage)
+
 $(window).on('load', function(){
 	if(Object.keys(localStorage).length > 10){
 		populateFirstTenIdeas(); 
@@ -5,14 +13,6 @@ $(window).on('load', function(){
 		populateAllIdeasToPage();
 	}
 });
-
-$('.show-all-tasks-btn').on('click', populateAllIdeasToPage)
-$('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
-$('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
-$('ul').on('focusout', ('.idea-title, .idea-body'), changeText);
-$('ul').on('click', ('.upvote-btn, .downvote-btn'), voting);
-$('ul').on('click', '.delete-btn', removeIdea);
-$('.search').on('keyup search', search);
 
 $('.idea-form').on('submit', function (event) {
 	event.preventDefault();
@@ -104,6 +104,7 @@ function populateFirstTenIdeas() {
 }
 
 function populateAllIdeasToPage() {
+	$('li').remove();
 	Object.keys(localStorage).forEach(function(idea) {
 		displayIdea(generateIdea(JSON.parse(localStorage.getItem(idea))));
 	})
