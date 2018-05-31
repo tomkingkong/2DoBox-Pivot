@@ -8,6 +8,7 @@ $('.search').on('keyup search', search);
 $('.show-more-btn').on('click', populateAllIdeasToPage);
 $('ul').on('click', '.completed-task-btn', toggleComplete);
 $('.filter-btns').on('click', 'input', filterImportance);
+$('.show-completed-btn').on('click', showCompletedTasks);
 
 $(window).on('load', function(){
 	if(Object.keys(localStorage).length > 10){
@@ -155,6 +156,10 @@ function toggleComplete() {
 	var currentIdea = getIdeaFromStorage($(this).closest("li").attr("data-id"));
 	currentIdea.isComplete = !currentIdea.isComplete;
 	setIdeaToStorage(currentIdea);
+}
+
+function showCompletedTasks() {
+	$('.completed').toggleClass('hide');
 }
 
 function filterImportance() {
