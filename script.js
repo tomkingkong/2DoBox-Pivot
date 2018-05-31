@@ -1,11 +1,13 @@
 $('.title-input').add($('.body-input')).on('keyup', enableSaveButton);
 $('ul').on('focus', ('.idea-title, .idea-body'), makeContentEditable);
 $('ul').on('focusout', ('.idea-title, .idea-body'), changeText);
+// $('ul').on('submit', ('.idea-title, .idea-body'), changeTextOnEnter);
 $('ul').on('click', ('.upvote-btn, .downvote-btn'), voting);
 $('ul').on('click', '.delete-btn', removeIdea);
 $('.search').on('keyup search', search);
-$('.show-more-btn').on('click', populateAllIdeasToPage)
+$('.show-more-btn').on('click', populateAllIdeasToPage);
 $('ul').on('click', '.completed-task-btn', toggleComplete);
+$('.filter-btns').on('click', 'input', filterImportance);
 
 $(window).on('load', function(){
 	if(Object.keys(localStorage).length > 10){
@@ -36,10 +38,9 @@ function Idea(title, body) {
 	this.title = title;
 	this.body = body;
 	this.id = Date.now();
-	this.quality = 'normal';
+	this.quality = 'Normal';
 	this.isComplete = false;
 }
-
 
 function newIdea(newIdea) {
 	var newIdea = new Idea($('.title-input').val(), $('.body-input').val());
@@ -54,7 +55,7 @@ function generateIdea(newIdea) {
 	var completed = 'idea-card'; 
 	if(newIdea.isComplete === true) {
 		completed = 'idea-card completed';
-		}
+	}
 	var ideaCard =
 		`<li role="idea card" aria-selected="true" class="${completed}" data-id="${newIdea.id}">
         <header class="idea-head">
@@ -91,6 +92,13 @@ function changeText() {
 	populateAllIdeasToPage();
 }
 
+function changeTextOnEnter(event){
+	event.preventDefault();
+	if(event.which === 13){
+		changeText();
+	}
+}
+
 function removeIdea() {
 	$(this).closest('li').remove();
 	localStorage.removeItem($(this).closest('li').attr('data-id'));
@@ -113,7 +121,6 @@ function populateFirstTenIdeas() {
 function populateAllIdeasToPage() {
 	$('li').remove();
 	Object.keys(localStorage).forEach(function(idea) {
-		console.log(JSON.parse(localStorage.getItem(idea)));
 		displayIdea(generateIdea(JSON.parse(localStorage.getItem(idea))));
 	})
 }
@@ -148,4 +155,27 @@ function toggleComplete() {
 	var currentIdea = getIdeaFromStorage($(this).closest("li").attr("data-id"));
 	currentIdea.isComplete = !currentIdea.isComplete;
 	setIdeaToStorage(currentIdea);
+}
+
+function filterImportance() {
+	$('li').remove();
+	var storageList = [];
+	Object.keys(localStorage).forEach(function(idea){
+		storageList.push(JSON.parse(localStorage.getItem(idea)));
+		return storageList;
+	})
+	if(this.className === 'critical'){
+		var filtered = 	storageList.filter(idea => idea.quality === 'Critical')
+	} else if (this.className === 'high'){
+		var filtered = storageList.filter(idea => idea.quality === 'High')
+	} else if (this.className === 'normal'){
+		var filtered = storageList.filter(idea => idea.quality === 'Normal')
+	} else if (this.className === 'low'){
+		var filtered = storageList.filter(idea => idea.quality === 'Low')
+	} else if (this.className === 'none'){
+		var filtered = storageList.filter(idea => idea.quality === 'None')
+	} 
+	filtered.forEach(function(idea){
+		displayIdea(generateIdea(idea))
+	})
 }

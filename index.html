@@ -22,20 +22,30 @@
 			</form>
 		</main>
 		<section aria-label="my idea list">
-			<nav class="filter-btns">
-				<input type="radio" name="filter" class="critical"> Critical</input>
-				<input type="radio" name="filter" class="critical"> High</input>
-				<input type="radio" name="filter" class="critical"> Normal</input>
-				<input type="radio" name="filter" class="critical"> Low</input>
-				<input type="radio" name="filter" class="critical"> None</input>
+			<nav class="filter-btns" role="filter buttons" aria-label="filter buttons">
+				<label for="critical">
+					<input class="critical" id="critical" name="filter" type="radio"> Critical
+				</label>
+				<label for="high">
+					<input class="high" id="high" name="filter" type="radio"> High
+				</label>
+				<label for="normal">
+					<input class="normal" id="normal" name="filter" type="radio"> Normal
+				</label>
+				<label for="low">
+					<input class="low" id="low" name="filter" type="radio"> Low
+				</label>
+				<label for="none">
+					<input class="none" id="none" name="filter" type="radio"> None
+				</label>
 			</nav>
 			<form class="search-form">
 				<input class="search" type="search" name="search" placeholder="Filter" aria-label="enter your search here">
 			</form>
 			<button class="completed-todos-btn" aria-label="completed-todos-button">Completed ToDo's</button>
 			<ul aria-label="idea list">
-				<button class="show-more-btn" aria-label="show more">Show More TODO's</button>
 			</ul>
+			<button class="show-more-btn" aria-label="show more">Show More ToDo's</button>
 		</section>
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

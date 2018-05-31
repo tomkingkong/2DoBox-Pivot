@@ -250,6 +250,7 @@ h3 {
 	outline: 0;
 	margin: 2em 0;
 	height: 2.5em;
+	max-width: 600px;
 	width: 100%;
 }
 
