@@ -36,7 +36,7 @@ function Idea(title, body) {
 	this.body = body;
 	this.id = Date.now();
 	this.quality = 'normal';
-	this.isRead = false;
+	this.isComplete = false;
 }
 
 function newIdea(newIdea) {

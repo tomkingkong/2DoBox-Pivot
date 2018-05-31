@@ -201,6 +201,8 @@ h3 {
 	background: url(images/downvote-hover.svg) no-repeat;
 }
 
+/* Completed Task Button */
+
 .completed-task-btn {
 	background: url(images/upvote.svg) no-repeat;
 	outline: 0;
@@ -218,6 +220,8 @@ h3 {
 	text-decoration: line-through;
 }
 
+/* Show More Button */
+
 .show-more-btn {
 	background-color: #00a79d;
 	border: 1px solid #939598;
@@ -232,6 +236,8 @@ h3 {
 .show-more-btn:hover {
 	background-color: #045e55;
 }
+
+
 
 
 /* screen at 400px or less */
