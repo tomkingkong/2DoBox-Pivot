@@ -54,7 +54,7 @@ function displayIdea(idea) {
 function generateIdea(newIdea) {
 	var completed = 'idea-card'; 
 	if(newIdea.isComplete === true) {
-		completed = 'idea-card completed';
+		completed = 'idea-card completed hide';
 	}
 	var ideaCard =
 		`<li role="idea card" aria-selected="true" class="${completed}" data-id="${newIdea.id}">
@@ -147,11 +147,11 @@ function search() {
 	})
 	storageList.filter(idea => idea.title.match(regexp) || idea.body.match(regexp)).forEach(function(idea){
 			displayIdea(generateIdea(idea));
-		});
+	});
 }
 
 function toggleComplete() {
-	$(this).closest('li').toggleClass('completed')
+	$(this).closest('li').toggleClass('completed');
 	var currentIdea = getIdeaFromStorage($(this).closest("li").attr("data-id"));
 	currentIdea.isComplete = !currentIdea.isComplete;
 	setIdeaToStorage(currentIdea);
@@ -163,19 +163,19 @@ function filterImportance() {
 	Object.keys(localStorage).forEach(function(idea){
 		storageList.push(JSON.parse(localStorage.getItem(idea)));
 		return storageList;
-	})
+	});
 	if(this.className === 'critical'){
-		var filtered = 	storageList.filter(idea => idea.quality === 'Critical')
+		var filtered = 	storageList.filter(idea => idea.quality === 'Critical');
 	} else if (this.className === 'high'){
-		var filtered = storageList.filter(idea => idea.quality === 'High')
+		var filtered = storageList.filter(idea => idea.quality === 'High');
 	} else if (this.className === 'normal'){
-		var filtered = storageList.filter(idea => idea.quality === 'Normal')
+		var filtered = storageList.filter(idea => idea.quality === 'Normal');
 	} else if (this.className === 'low'){
-		var filtered = storageList.filter(idea => idea.quality === 'Low')
+		var filtered = storageList.filter(idea => idea.quality === 'Low');
 	} else if (this.className === 'none'){
-		var filtered = storageList.filter(idea => idea.quality === 'None')
+		var filtered = storageList.filter(idea => idea.quality === 'None');
 	} 
 	filtered.forEach(function(idea){
-		displayIdea(generateIdea(idea))
-	})
+		displayIdea(generateIdea(idea));
+	});
 }

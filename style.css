@@ -246,8 +246,12 @@ h3 {
 /* Toggle Completed / Hide Class */
 
 .completed {
-	background-color:  #D1D2D3;
+	background-color: #D1D2D3;
 	text-decoration: line-through;
+}
+
+.hide {
+	display: none;
 }
 
 /* Show More Button */
