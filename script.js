@@ -134,7 +134,7 @@ function voting() {
 	: (this.className === 'downvote-btn' && thisQuality > 0) ? (thisQuality--, currentIdea.quality = qualityArray[thisQuality]) 
 	: currentIdea.quality = currentIdea.quality;
 	setIdeaToStorage(currentIdea);
-	location.reload();
+	$(this).siblings('small').text(currentIdea.quality);
 }
 
 function search() {

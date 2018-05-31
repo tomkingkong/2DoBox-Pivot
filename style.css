@@ -9,9 +9,9 @@ button {
 }
 
 .wrapper {
+	align-items: center;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 }
 
 input::placeholder {
@@ -58,8 +58,8 @@ form {
 	border: 0.06em solid #D1D2D3;
 	border-radius: 3px;
 	font-size: 1.5em;
-	padding: 2px 0.3em;
 	margin: 0.3rem 0;
+	padding: 2px 0.3em;
 	width: 100%;
 	transition: all 0.25s linear;
 }
@@ -72,6 +72,7 @@ form {
 	outline: 0;
 	color: #fff;
 	background-color: #00A79D;
+	font-size: 1.5em;
 	margin: 0.3rem 0;
 	padding: 10px;
 	width: 100%;
@@ -84,9 +85,9 @@ form {
 /* ideas section */
 
 section {
+	align-items: center;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	text-align: center;
 	padding: 2rem 1.5rem;
 	width: 100%;
@@ -96,11 +97,11 @@ section {
 
 .search {
 	font-size: 1.5em;
-	outline: 0;
 	border: .06em solid #D1D2D3;
 	border-radius: 3px;
-	padding: 0 10px;
+	outline: 0;
 	margin-bottom: 1em;
+	padding: 0 10px;
 	max-width: 600px;
 	width: 100%;
 }
@@ -108,28 +109,28 @@ section {
 /* idea card */
 
 li {
+	border-bottom: 2px solid #D1D2D3;
 	display: flex;
 	flex-direction: column;
 	text-align: left;
-	border-bottom: 2px solid #D1D2D3;
 	margin-bottom: 1em;
 	max-width: 600px;
 	width: 90vw;
 }
 
 li header {
+	align-items: center;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 	padding-top: 2em;
 }
 
 /* Card Title */
 
 h2 {
+	color: #6D6E71;
 	font-family: "Roboto Slab", serif;
 	font-size: 1.4em;
-	color: #6D6E71;
 	overflow: hidden;
 	max-height: 2em;
 	max-width: 20em;
@@ -138,10 +139,10 @@ h2 {
 /* Card Body */
 
 li p {
-	overflow: scroll;
 	color: #939598;
 	font-size: 1.2em;
 	line-height: 1.3em;
+	overflow: scroll;
 	margin: .8em 0;
 	max-height: 4em;
 }
@@ -149,8 +150,8 @@ li p {
 /* Card Quality / Delete / Upvote / Downvote  */
 
 li footer {
-	display: flex;
 	align-items: center;
+	display: flex;
 	padding: 1em 0;
 }
 
@@ -169,8 +170,8 @@ h3 {
 .delete-btn {
 	background: url(images/delete.svg) no-repeat;
 	outline: 0;
-	width: 1.5em;
 	height: 1.5em;
+	width: 1.5em;
 }
 
 .delete-btn:hover {
@@ -182,8 +183,8 @@ h3 {
 .upvote-btn {
 	background: url(images/upvote.svg) no-repeat;
 	outline: 0;
-	width: 1.5em;
 	height: 1.5em;
+	width: 1.5em;
 }
 
 .upvote-btn:hover {
@@ -195,31 +196,30 @@ h3 {
 .downvote-btn {
 	background: url(images/downvote.svg) no-repeat;
 	outline: 0;
-	margin: 0 .8em;
-	width: 1.5em;
+	margin: 0 0.8em;
 	height: 1.5em;
+	width: 1.5em;
 }
 
 .downvote-btn:hover {
 	background: url(images/downvote-hover.svg) no-repeat;
-	background-color: skyblue;
 }
 
 /* Completed Task Button */
 
 .completed-task-btn {
-	background: url(images/circle.svg) no-repeat;
-	background-color: lightgray;
 	border: 1px solid #939598;
 	border-radius: 50%;
 	outline: 0;
 	margin-right: 0.8em;
-	width: 1.3em;
 	height: 1.3em;
+	width: 1.3em;
 }
 
 .completed-task-btn:hover {
-	background: url(images/bluecheck.svg) no-repeat;
+	background-image: url(images/bluecheck.svg);
+	background-repeat: no-repeat;
+	background-color: skyblue;
 }
 
 /* Toggle Completed / Hide Class */
@@ -244,23 +244,23 @@ h3 {
 }
 
 .filter-btns label {
-	display: flex;
 	align-items: center;
+	display: flex;
 	width: 4.5em;
 }
 
 /* Show Completed Tasks Button */
 
 .show-completed-btn {
+	color: #fff;
+	background-color: yellowgreen;
 	border: 0;
 	border-radius: 3px;
 	outline: 0;
-	color: #fff;
-	background-color: yellowgreen;
 	margin: 0.3rem 0;
 	padding: 10px;
-	width: 100%;
 	max-width: 600px;
+	width: 100%;
 }
 
 .show-completed-btn:hover {
@@ -270,10 +270,10 @@ h3 {
 /* Show More Tasks Button */
 
 .show-more-btn {
+	color: #fff;
 	background-color: #00a79d;
 	border: 1px solid #939598;
 	border-radius: 2px;
-	color: #fff;
 	outline: 0;
 	margin: 2em 0;
 	height: 2.5em;
