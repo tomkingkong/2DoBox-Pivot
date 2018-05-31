@@ -159,6 +159,15 @@ function toggleComplete() {
 }
 
 function showCompletedTasks() {
+	$('li').remove();
+	var storageList = [];
+	Object.keys(localStorage).forEach(function(idea){
+		storageList.push(JSON.parse(localStorage.getItem(idea)));
+		return storageList;
+	});
+	storageList.sort(function(a, b){return a.isComplete - b.isComplete}).forEach(function(idea) {
+		displayIdea(generateIdea(idea));
+	});
 	$('.completed').toggleClass('hide');
 }
 
