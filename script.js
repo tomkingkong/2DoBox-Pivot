@@ -16,14 +16,14 @@ $(window).on('load', function(){
 	} else {
 		populateAllIdeasToPage();
 	}
-});
+})
 
 $('.idea-form').on('submit', function (event) {
 	event.preventDefault();
 	setIdeaToStorage(newIdea(newIdea));
 	displayIdea(generateIdea(newIdea(newIdea)));
 	clearForm();
-});
+})
 
 function enableSaveButton() {
 	($('.title-input').val() === '' || $('.body-input').val() === '') ? 
@@ -65,7 +65,7 @@ function generateIdea(newIdea) {
         </header>
         <p class="idea-body" tabindex="0" contenteditable="false" type="submit">${newIdea.body}</p>
 				<footer>
-					<button class="completed-task-btn" aria-label="completed"></button>
+					<input class="completed-task-btn" aria-label="completed">
 					<button class="upvote-btn" aria-label="upvote"></button>
 					<button class="downvote-btn" aria-label="downvote"></button>
 					<h3>quality:&nbsp;</h4>
@@ -73,7 +73,7 @@ function generateIdea(newIdea) {
         </footer>
     </li>`;
 	return ideaCard;
-};
+}
 
 function makeContentEditable(event) {
 	if ($(event.target).prop('contenteditable', false)){

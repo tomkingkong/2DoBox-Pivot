@@ -70,7 +70,7 @@ form {
 	border: 0;
 	border-radius: 3px;
 	outline: 0;
-	color: #fff;
+	color: #E5F3F2;
 	background-color: #00A79D;
 	font-size: 1.5em;
 	margin: 0.3rem 0;
@@ -210,6 +210,7 @@ h3 {
 .completed-task-btn {
 	border: 1px solid #939598;
 	border-radius: 50%;
+	cursor: pointer;
 	outline: 0;
 	margin-right: 0.8em;
 	height: 1.3em;
@@ -218,8 +219,6 @@ h3 {
 
 .completed-task-btn:hover {
 	background-image: url(images/bluecheck.svg);
-	background-repeat: no-repeat;
-	background-color: skyblue;
 }
 
 /* Toggle Completed / Hide Class */
@@ -252,8 +251,8 @@ h3 {
 /* Show Completed Tasks Button */
 
 .show-completed-btn {
-	color: #fff;
-	background-color: yellowgreen;
+	color: #E5F3F2;
+	background-color: #00a79d;
 	border: 0;
 	border-radius: 3px;
 	outline: 0;
@@ -264,13 +263,13 @@ h3 {
 }
 
 .show-completed-btn:hover {
-	background-color: forestgreen;
+	background-color: #045e55;
 }
 
 /* Show More Tasks Button */
 
 .show-more-btn {
-	color: #fff;
+	color: #E5F3F2;
 	background-color: #00a79d;
 	border: 1px solid #939598;
 	border-radius: 2px;
