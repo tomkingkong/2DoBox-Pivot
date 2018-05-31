@@ -258,21 +258,21 @@ h3 {
 	background-color: #045e55;
 }
 
+/* Filter Importance Radio Buttons */
+
 .filter-btns {
-	width: 100%;
 	display: flex;
-	max-width: 600px;
 	justify-content: space-between;
-
-
-}
-.filter-btns input {
-	margin-bottom: 1em;
+	margin: 0 0 1em 0;
+	max-width: 600px;
+	width: 100%;
 }
 
-
-
-
+.filter-btns label {
+	display: flex;
+	align-items: center;
+	width: 4.5em;
+}
 
 /* screen at 400px or less */
 
